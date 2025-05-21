@@ -60,3 +60,8 @@ function CartModal() {
     </>
   );
 }
+
+// web3 - dar;
+// Onlineagentalmashell@gmail.com
+// git config --global user.requirejide
+// git config --global user.requirejide@gmail.com

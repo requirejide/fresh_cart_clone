@@ -1,0 +1,9 @@
+[user]
+	name = web3-dar
+	email = Onlineagentalmashell@gmail.com
+
+[credential]
+	helper = wincred
+
+[init]
+	default = branch
