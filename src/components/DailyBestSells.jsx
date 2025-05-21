@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import coffeBanner from "../assets/goods_cta/banner-deal.jpg";
 import usePrdouct from "../stores/useProduct";
 import {
@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { MdOutlineCompareArrows } from "react-icons/md";
+import CountdownTimer from "./CountdownTimer";
 
 export default function DailyBestSells() {
   const { allProduct } = usePrdouct();
@@ -58,9 +59,37 @@ function CoffeeBanner() {
 }
 
 function SalesList({ value }) {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const days = 30;
+    const hours = 23;
+    const minutes = 50;
+    const seconds = 40;
+
+    const totalHours = days * 24 + hours;
+    const totalMinutes = totalHours * 60 + minutes;
+    const totalSeconds = totalMinutes * 60 + seconds;
+
+    return totalSeconds;
+  });
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+  const days = Math.floor(timeLeft / (24 * 3600));
+  const hours = Math.floor((timeLeft % (24 * 3600)) / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const seconds = timeLeft % 60;
   return (
     <div className="relative flex flex-col min-w-[300px]   border border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-lg transition-all hover:border-teal-500 cursor-pointer bg-white">
       {/* Product Image */}
+
       <div className="relative w-full h-48 sm:h-56 flex items-center justify-center rounded-md bg-gray-50 overflow-hidden">
         <img
           src={value.image[0]}
@@ -112,15 +141,24 @@ function SalesList({ value }) {
 
       {/* Countdown Timer */}
       <div className="flex flex-wrap justify-center gap-2 mt-5">
-        {["Days", "Hours", "Mins", "Sec"].map((label, index) => (
-          <div
-            key={index}
-            className="w-16 h-14 flex flex-col items-center justify-center border rounded-md text-sm font-medium p-1 bg-gray-50"
-          >
-            <p className="lowercase">{label.toLowerCase()}</p>
-            <p className="text-gray-700">{label}</p>
-          </div>
-        ))}
+        {/* <CountdownTimer  day={30} hour={23} minute={59} second={59} /> */}
+
+        <div className="border p-2 px-3 rounded-lg border-gray-300 text-center">
+          <p className="lowercase">{days}</p>
+          <p className="text-gray-700 text-sm">Days</p>
+        </div>
+        <div className="border p-2 px-3 rounded-lg border-gray-300 text-center">
+          <p className="lowercase">{hours}</p>
+          <p className="text-gray-700 text-sm">Hours</p>
+        </div>
+        <div className="border p-2 px-3 rounded-lg border-gray-300 text-center">
+          <p className="lowercase">{minutes}</p>
+          <p className="text-gray-700 text-sm">Mins</p>
+        </div>
+        <div className="border p-2 px-3 rounded-lg border-gray-300 text-center">
+          <p className="lowercase">{seconds}</p>
+          <p className="text-gray-700 text-sm">Sec</p>
+        </div>
       </div>
     </div>
   );

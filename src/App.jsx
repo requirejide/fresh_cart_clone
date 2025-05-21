@@ -11,6 +11,7 @@ import useToggle from "./stores/useToggle";
 import usePrdouct from "./stores/useProduct";
 import DailyBestSells from "./components/DailyBestSells";
 import Footer from "./components/Footer";
+import CountdownTimer from "./components/CountdownTimer";
 
 function App() {
   return (
@@ -60,8 +61,3 @@ function CartModal() {
     </>
   );
 }
-
-// web3 - dar;
-// Onlineagentalmashell@gmail.com
-// git config --global user.requirejide
-// git config --global user.requirejide@gmail.com
