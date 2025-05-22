@@ -5,7 +5,7 @@ import good_2 from "../assets/goods_cta/image_8.jpg";
 export default function Cta() {
   return (
     <>
-      <div className="max-w-[90%] lg:max-w-[85%] mx-auto mt-8 mb-10">
+      <div className=" mt-8 mb-10">
         <div className="md:flex md:items-center md:gap-x-10">
           <div className="md:w-1/2 h-[200px] md:h-full relative mb-3 md:mb-0">
             <img

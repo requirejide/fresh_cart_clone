@@ -38,9 +38,9 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="border-t border-gray-200 my-3">
-      <div className="max-w-[94%] lg:max-w-[85%] mx-auto relative  flex mt-5 h-[75vh] overflow-scroll scrollbar-hide">
-        <div className=" absolute z-50 bottom-5 flex gap-3  w-full justify-center">
+    <div className="my-3">
+      <div className=" relative  flex mt-5 h-[75vh] overflow-hidden scrollbar-hide">
+        <div className=" absolute z-50 bottom-10 flex gap-3  w-full justify-center">
           {Array.from({ length: carousel.length }, (_, i) => i).map((value) => (
             <span
               key={value}
@@ -55,7 +55,7 @@ export default function Carousel() {
             onMouseEnter={pauseSlide}
             onMouseLeave={nextSlide}
             key={index}
-            className={`bg-amber-400 bg-right md:bg-center rounded-xl transition-all duration-[0.5s]   w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
+            className={`bg-amber-400  md:bg-center rounded-xl transition-all duration-[0.5s]   w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
             style={{
               backgroundImage: `url(${value.img})`,
               // backgroundPosition: "center",
@@ -68,10 +68,10 @@ export default function Carousel() {
               <span className="inline-block mb-5 text-xs font-semibold py-1 px-3 rounded-full bg-[#ffc107]">
                 {value.text_1}
               </span>
-              <h1 className="font-extrabold text-4xl md:text-5xl md:max-w-[60%] mb-3 text-[#ffffff] md:text-[#001e2b] md:leading-14">
+              <h1 className="font-extrabold text-4xl md:text-5xl md:max-w-[60%] mb-3 text-[#001e2b] md:leading-14">
                 {value.text_2}
               </h1>
-              <p className="text-white md:text-[#5c6c75] font-medium max-w-[80%] md:max-w-[60%] mb-3">
+              <p className="text-[#5c6c75] font-medium max-w-[80%] md:max-w-[60%] mb-3">
                 {value.text_3}
               </p>
               <button className="bg-[#001e2b] hover:bg-[#26404B] text-white py-3 w-34 rounded-lg">

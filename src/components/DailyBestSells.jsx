@@ -19,7 +19,7 @@ export default function DailyBestSells() {
   const { allProduct } = usePrdouct();
   return (
     <>
-      <div className="max-w-[90%]  lg:max-w-[85%] mx-auto">
+      <div className="">
         <h2 className="text-2xl font-semibold mb-7">Daily Best Sells</h2>
         <div className="h-[500px] flex justify-between gap-x-3 overflow-scroll scrollbar-hide">
           <CoffeeBanner />

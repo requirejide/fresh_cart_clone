@@ -3,24 +3,29 @@ import freshcart from "../assets/svg/freshcart-logo.svg";
 import { SlLocationPin } from "react-icons/sl";
 import useToggle from "../stores/useToggle";
 import usePrdouct from "../stores/useProduct";
+import { Link, useNavigate } from "react-router";
 
 function Navbar() {
+  const navigate = useNavigate();
   return (
     <>
-      <nav className="max-w-[94%] lg:max-w-[85%] mx-auto pt-5 pb-5 lg:pb-4 bg-white  ">
+      <nav className=" pt-5 pb-5 lg:pb-4 bg-white  ">
         <div className="flex items-center justify-between">
-          <div>
+          <Link>
             <img
               src={freshcart}
               alt="company logo"
               className="object-cover cursor-pointer"
             />
-          </div>
-          <div className="hidden w-[55%]  md:flex md:items-center md:gap-x-2 ">
+          </Link>
+          <form
+            onSubmit={() => navigate("/products")}
+            className="hidden w-[55%]  md:flex md:items-center md:gap-x-2 "
+          >
             <SearchBar />
 
             <LocationBtn />
-          </div>
+          </form>
 
           <div className="flex  items-center gap-x-4">
             <WishlistSvg />

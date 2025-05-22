@@ -30,7 +30,7 @@ const featuredCat = [
 export default function FeaturedCategories() {
   return (
     <>
-      <div className="max-w-[94%] lg:max-w-[85%] mx-auto mb-10">
+      <div className=" mb-10">
         <FeaturedTitle />
         <FeaturedSlider />
       </div>

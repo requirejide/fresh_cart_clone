@@ -139,7 +139,7 @@ const allCategoryList = [
 
 export default function Collection() {
   return (
-    <nav className="max-w-[94%] lg:max-w-[85%] mx-auto">
+    <nav className="">
       <div className="hidden lg:flex items-center gap-x-6">
         <AllCategoryBtn />
         <AllCategories />

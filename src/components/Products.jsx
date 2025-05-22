@@ -5,10 +5,11 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import usePrdouct from "../stores/useProduct";
 import useToggle from "../stores/useToggle";
+import { Link } from "react-router";
 
 export default function Products() {
   return (
-    <div className="relative max-w-[90%]  lg:max-w-[85%] mx-auto mt-20 mb-15">
+    <div className="relative  mt-20 mb-15">
       <h3 className="text-2xl font-semibold mb-7">Popular Products</h3>
       <div>
         <Product />
@@ -59,18 +60,23 @@ function Card({ value }) {
       <span className="absolute top-3 left-3 text-xs font-semibold bg-red-600 text-white px-2 py-1 rounded-md">
         Sale
       </span>
-      <span className="absolute top-3 right-3 text-xs font-semibold bg-green-600 text-white px-2 py-1 rounded-md">
+      <span className="absolute  top-3 right-3 text-xs font-semibold bg-green-600 text-white px-2 py-1 rounded-md">
         10%
       </span>
 
       {/* Product Image */}
-      <a href="#" className="block w-full h-[180px] mb-4">
+      {/* .replaceAll(" ", "-") */}
+      <Link
+        to={`/shop/${value.title.replaceAll(" ", "-")}`}
+        onClick={() => console.log(value.id)}
+        className="block w-full h-[180px] mb-4 "
+      >
         <img
           src={value.image[0]}
           alt="product"
           className="w-full h-full object-contain rounded-md"
         />
-      </a>
+      </Link>
 
       {/* Product Info */}
       <p className="text-sm text-gray-500 mb-1">{value.category}</p>
@@ -104,7 +110,7 @@ function Card({ value }) {
       </div>
 
       {/* Action Icons on Hover */}
-      <div className="absolute inset-0 flex justify-center items-center gap-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
+      <div className="absolute flex justify-center items-center gap-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
         <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow hover:scale-110 transition">
           <IoEyeOutline className="text-black text-sm" />
         </div>

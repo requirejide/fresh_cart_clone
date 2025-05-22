@@ -10,7 +10,7 @@ export default function Cart() {
       {isCartOpen && (
         <div
           onClick={() => setIsCartOpen(false)}
-          className={`fixed  top-0 bottom-0   w-full z-[100] bg-[#0000006c] flex justify-end`}
+          className={`fixed  top-0 bottom-0 left-0   w-full z-[100] bg-[#0000006c] flex justify-end`}
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -44,7 +44,7 @@ function CartInfo() {
           <IoCloseOutline />
         </div>
       </div>
-      <hr className="text-gray-300 mb-4" />
+
       <div className="w-[93%] mx-auto overflow-scroll scrollbar-hide max-h-[73vh]">
         <p className="bg-[#F8D6D6] border border-red-300 p-3 text-sm rounded-lg">
           You’ve got FREE delivery. Start
