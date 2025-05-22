@@ -6,6 +6,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 import { LuShoppingBag } from "react-icons/lu";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import BackwardLink from "./BackwardLink";
+import Card from "./Card";
 
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
@@ -13,47 +14,83 @@ export default function Product() {
   const { allProduct } = usePrdouct();
   const [selectedImg, setSelectedImg] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
+  const [zoom, setZoom] = useState(false);
+  const [pointer, setPointer] = useState({ x: 50, y: 50 });
   const { title } = useParams();
 
   const details = allProduct.find(
     (value) => value.title.replaceAll(" ", "-") === title
   );
 
+  const handleMouseMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    setZoom(true);
+    setPointer({ x, y });
+  };
+
+  const handleTouchMove = (event) => {
+    const touch = event.touches[0];
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((touch.clientX - rect.left) / rect.width) * 100;
+    const y = ((touch.clientY - rect.top) / rect.height) * 100;
+    setZoom(true);
+    setPointer({ x, y });
+  };
+  const related = allProduct.slice(0, 5);
+
   return (
     <>
       <BackwardLink details={details} />
-      <div className="bg-white  px-4 sm:px-6 lg:px-8">
+      <div className="bg-white px-2 sm:px-6 mt-14  lg:px-8">
         <div className="max-w-7xl  mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-10">
           {/* Product Image */}
-          <div className="flex justify-center flex-col ">
-            <img
-              src={details.image[selectedImg]}
-              alt={details.title}
-              className="rounded-lg object-cover w-full max-w-md"
-            />
-            <div className="w-full h-[100px] md:h-[120px]  flex gap-4 p-3 scrollbar-hide overflow-scroll">
+          <div className="flex justify-center  flex-col md:space-y-4  ">
+            <div
+              onMouseOut={() => setZoom(false)}
+              onMouseMove={handleMouseMove}
+              onTouchMove={handleTouchMove}
+              className="relative"
+            >
+              <img
+                src={details.image[selectedImg]}
+                alt={details.title}
+                className="rounded-lg  object-cover w-full mx-auto md:w-full max-w-md "
+              />
+              {zoom && (
+                <div
+                  style={{
+                    backgroundImage: `url(${details.image[selectedImg]})`,
+                    backgroundSize: "200%",
+                    backgroundPosition: `${pointer.x}% ${pointer.y}%`,
+                  }}
+                  className="absolute w-full h-full z-50 bg-white hover:cursor-crosshair top-0 bottom-0 left-0 right-0"
+                ></div>
+              )}
+            </div>
+            <div className="w-full  h-[100px] md:h-[120px]  flex gap-4 p-3 scrollbar-hide overflow-scroll">
               {details.image.map((value, index) => (
                 <div
                   key={index}
+                  style={{ backgroundImage: `url(${value})` }}
                   onClick={() => setSelectedImg(index)}
-                  className={`w-[100px]  md:w-[150px] h-full  ${
-                    index === selectedImg
-                      ? "border-2 border-green-600"
-                      : "border border-gray-400"
+                  className={`w-[80px] h-[60px] bg-contain bg-no-repeat bg-center   md:w-[150px] md:h-full overflow-hidden  ${
+                    index === selectedImg ? "border-2 border-green-600" : ""
                   } rounded-lg flex-shrink-0`}
                 >
-                  <img
+                  {/* <img
                     src={value}
                     alt={details.title}
                     className="w-full h-full object-contain"
-                  />
+                  /> */}
                 </div>
               ))}
             </div>
           </div>
 
           {/* Product Details */}
-          <div className="flex  flex-col justify-between ">
+          <div className="flex flex-col justify-between ">
             <div>
               <span className="text-green-600 mb-5 text-sm font-semibold inline-block">
                 {details.category}
@@ -117,9 +154,8 @@ export default function Product() {
             </div>
           </div>
         </div>
-
         {/* Tabs */}
-        <div className="mt-10  max-w-7xl mx-auto scrollbar-hide mb-10  overflow-scroll">
+        <div className="mt-10 mb-32  max-w-7xl mx-auto scrollbar-hide  overflow-scroll">
           <div className="border-b border-gray-200">
             <ul className="-mb-px flex space-x-8 " aria-label="Tabs">
               {tabs.map((value, index) => (
@@ -142,6 +178,13 @@ export default function Product() {
           {selectedTab === 0 && <ProductDetails />}
 
           {selectedTab === 1 && <ProductInformation />}
+        </div>
+        <h3 className="text-3xl mb-5">Related Items</h3>
+
+        <div className="grid grid-cols-2 lg:grid-cols-5 space-y-5 mb-20 md:space-y-0 gap-x-3">
+          {related.map((value) => (
+            <Card key={value.id} value={value} />
+          ))}
         </div>
       </div>
     </>

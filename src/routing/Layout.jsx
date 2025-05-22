@@ -17,14 +17,14 @@ export default function Layout() {
         background="#F0F3F2"
         textcolor="#5C6C75"
       />
-      <header className="max-w-[96%]  lg:max-w-[85%] mx-auto mb-3">
+      <header className="max-w-[93%]  lg:max-w-[85%] mx-auto mb-3">
         <Cart />
         <CartModal />
         <Navbar />
         <Collection />
       </header>
       <hr className="text-gray-300 mb-4" />
-      <main className="max-w-[95%]  lg:max-w-[85%] mx-auto">
+      <main className="max-w-[93%]  lg:max-w-[85%] mx-auto">
         <Outlet />
       </main>
       <Footer />

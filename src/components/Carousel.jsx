@@ -39,7 +39,7 @@ export default function Carousel() {
 
   return (
     <div className="my-3">
-      <div className=" relative  flex mt-5 h-[75vh] overflow-hidden scrollbar-hide">
+      <div className=" relative  flex mt-5 h-[55vh] md:h-[75vh] overflow-hidden scrollbar-hide">
         <div className=" absolute z-50 bottom-10 flex gap-3  w-full justify-center">
           {Array.from({ length: carousel.length }, (_, i) => i).map((value) => (
             <span
@@ -55,7 +55,7 @@ export default function Carousel() {
             onMouseEnter={pauseSlide}
             onMouseLeave={nextSlide}
             key={index}
-            className={`bg-amber-400  md:bg-center rounded-xl transition-all duration-[0.5s]   w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
+            className={`bg-amber-400   bg-center rounded-xl transition-all duration-[0.5s]   w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
             style={{
               backgroundImage: `url(${value.img})`,
               // backgroundPosition: "center",
