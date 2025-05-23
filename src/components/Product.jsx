@@ -51,6 +51,7 @@ export default function Product() {
               onMouseOut={() => setZoom(false)}
               onMouseMove={handleMouseMove}
               onTouchMove={handleTouchMove}
+              onTouchEnd={() => setZoom(false)}
               className="relative"
             >
               <img

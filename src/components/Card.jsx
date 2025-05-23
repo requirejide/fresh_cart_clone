@@ -29,7 +29,7 @@ function Card({ value }) {
   return (
     <li
       key={value.id}
-      className="relative  overflow-hidden border  hover:border-green-600 border-gray-100 w-full rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+      className="relative  overflow-hidden border  hover:border-green-600 border-gray-200 w-full rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-all duration-300"
     >
       {/* Sale & Discount Badges */}
       <span className="absolute top-3 left-3 text-xs font-semibold bg-red-600 text-white px-2 py-1 rounded-md">
