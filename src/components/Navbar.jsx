@@ -143,7 +143,7 @@ function Hambuger() {
 function SearchBar() {
   const [outline, setOutline] = useState(false);
   const [inputEl, setInputEl] = useState("");
-  const { allProduct } = usePrdouct();
+  // const { allProduct } = usePrdouct();
 
   window.addEventListener("click", function () {
     setOutline(false);

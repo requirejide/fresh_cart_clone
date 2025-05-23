@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router";
 import SuperDeal from "../features/SuperDeal";
 import Navbar from "../components/Navbar";
@@ -7,10 +6,13 @@ import Cart from "../components/Cart";
 import Footer from "../components/Footer";
 import CartModal from "../components/CartModal";
 import ScrollToTop from "../components/ScrollToTop";
+import { FaAngleRight } from "react-icons/fa6";
+import CategoryAside from "../components/CategoryAside";
 
 export default function Layout() {
   return (
     <div className="relative">
+      <CategoryAside />
       <ScrollToTop />
       <SuperDeal
         text="Super Value Deals - Save more with coupons"
