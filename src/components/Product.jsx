@@ -7,6 +7,7 @@ import { LuShoppingBag } from "react-icons/lu";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import BackwardLink from "./BackwardLink";
 import Card from "./Card";
+import { motion } from "motion/react";
 
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
@@ -43,7 +44,12 @@ export default function Product() {
   return (
     <>
       <BackwardLink details={details} />
-      <div className="bg-white px-2 sm:px-6 mt-14  lg:px-8">
+      <motion.div
+        initial={{ x: `100%` }}
+        animate={{ x: `0%` }}
+        transition={{ duration: 0.5 }}
+        className="bg-white px-2 sm:px-6 mt-14  lg:px-8"
+      >
         <div className="max-w-7xl  mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-10">
           {/* Product Image */}
           <div className="flex justify-center  flex-col md:space-y-4  ">
@@ -187,7 +193,7 @@ export default function Product() {
             <Card key={value.id} value={value} />
           ))}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

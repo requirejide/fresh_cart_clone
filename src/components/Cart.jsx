@@ -2,28 +2,34 @@ import { IoCloseOutline } from "react-icons/io5";
 import useToggle from "../stores/useToggle";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import usePrdouct from "../stores/useProduct";
-
+import { AnimatePresence, motion } from "motion/react";
+motion;
 export default function Cart() {
   const { isCartOpen, setIsCartOpen } = useToggle();
   return (
     <>
-      {isCartOpen && (
-        <div
-          onClick={() => setIsCartOpen(false)}
-          className={`fixed  top-0 bottom-0 left-0   w-full z-[100] bg-[#0000006c] flex justify-end`}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className={`w-[550px] h-full bg-white transition-all duration-[0.2s]  ${
-              isCartOpen
-                ? "translate-x-0 delay-[0.5s]"
-                : "translate-x-[-100%] delay-[0.5s"
-            }`}
+      <AnimatePresence>
+        {isCartOpen && (
+          <motion.div
+            initial={{ opacity: 0, translateX: "100%", scale: 0.5 }}
+            animate={{ opacity: 1, translateX: "0%", scale: 1 }}
+            transition={{
+              duration: 0.3,
+              scale: { type: "spring", bounce: 0.7 },
+            }}
+            exit={{ opacity: 0, translateX: "100%", scale: 0 }}
+            onClick={() => setIsCartOpen(false)}
+            className={`fixed  top-0 bottom-0 left-0   w-full z-[100] bg-[#0000006c] flex justify-end`}
           >
-            <CartInfo />
-          </div>
-        </div>
-      )}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className={`w-[550px] h-full bg-white transition-all duration-[0.2s]  `}
+            >
+              <CartInfo />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

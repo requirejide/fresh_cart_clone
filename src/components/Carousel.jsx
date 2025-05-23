@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import slide_1 from "../assets/carousel/image_1.jpg";
 import slide_2 from "../assets/carousel/image_2.jpg";
-
+import { motion } from "motion/react";
+motion;
 const carousel = [
   {
     img: slide_1,
@@ -51,17 +52,22 @@ export default function Carousel() {
           ))}
         </div>
         {carousel.map((value, index) => (
-          <div
+          <motion.div
+            animate={{ translateX: `-${currentIndex * 100}%` }}
+            transition={{
+              duration: 0.5,
+              translateX: { type: "spring", bounce: 0.5 },
+            }}
             onMouseEnter={pauseSlide}
             onMouseLeave={nextSlide}
             key={index}
-            className={`bg-amber-400   bg-center rounded-xl transition-all duration-[0.5s]   w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
+            className={`bg-amber-400   bg-center rounded-xl    w-full h-full flex pl-7  md:pl-10 items-center flex-shrink-0 `}
             style={{
               backgroundImage: `url(${value.img})`,
               // backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              transform: `translateX(-${currentIndex * 100}%)`,
+              // transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
             <div>
@@ -78,7 +84,7 @@ export default function Carousel() {
                 Shop now 👉
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

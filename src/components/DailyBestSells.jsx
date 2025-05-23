@@ -14,6 +14,7 @@ import {
 import { IoEyeOutline } from "react-icons/io5";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import CountdownTimer from "./CountdownTimer";
+import { Link } from "react-router";
 
 export default function DailyBestSells() {
   const { allProduct } = usePrdouct();
@@ -90,13 +91,16 @@ function SalesList({ value }) {
     <div className="relative flex flex-col min-w-[300px]   border border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-lg transition-all hover:border-teal-500 cursor-pointer bg-white">
       {/* Product Image */}
 
-      <div className="relative w-full h-48 sm:h-56 flex items-center justify-center rounded-md bg-gray-50 overflow-hidden">
+      <Link
+        to={`/shop/${value.title.replaceAll(" ", "-")}`}
+        className="relative w-full h-48 sm:h-56 flex items-center justify-center rounded-md bg-gray-50 overflow-hidden"
+      >
         <img
           src={value.image[0]}
           alt="Product"
           className="object-contain w-full h-full p-4"
         />
-      </div>
+      </Link>
 
       {/* Action Buttons (centered on image) */}
       {/* <div className="absolute top-4 right-4 flex gap-2 z-20">

@@ -6,6 +6,7 @@ import usePrdouct from "../stores/useProduct";
 import { Link } from "react-router";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IoFunnelOutline } from "react-icons/io5";
+import { motion } from "motion/react";
 
 export default function Shop() {
   const { allProduct } = usePrdouct();
@@ -25,7 +26,12 @@ export default function Shop() {
   return (
     <>
       <BackwardLinks />
-      <section className="flex gap-x-10">
+      <motion.section
+        initial={{ x: `100%` }}
+        animate={{ x: `0%` }}
+        transition={{ duration: 0.5 }}
+        className="flex gap-x-10"
+      >
         <aside className="hidden lg:block lg:w-[20%] p-3 py">
           <CategoriesInShop />
         </aside>
@@ -42,7 +48,7 @@ export default function Shop() {
             prevPage={() => setCurrentPage((curr) => (curr > 1 ? curr - 1 : 1))}
           />
         </main>
-      </section>
+      </motion.section>
     </>
   );
 }
@@ -69,7 +75,7 @@ function CategoriesInShop() {
         <ul key={value.id}>
           <li
             onClick={() => handleCategory(value.id)}
-            className="flex items-center catgoriesPsuedo relative hover:text-green-600 cursor-pointer justify-between  text-sm font-semibold text-gray-900 py-3"
+            className="flex items-center catgoriesPsuedo relative hover:text-green-600 cursor-pointer justify-between  text-sm font-semibold text-gray-700 py-3"
           >
             {value.title} <FaAngleRight className="ml-2 text-xs" />
           </li>
@@ -77,7 +83,7 @@ function CategoriesInShop() {
             value.sub_category.map((value) => (
               <p
                 key={value}
-                className="text-sm mt-3 mb-5 transition-all duration-[0.5s] ml-2"
+                className="text-sm mt-3 hover:text-green-600 mb-4 cursor-pointer transition-all duration-[0.5s] ml-4"
               >
                 {value}
               </p>
