@@ -11,6 +11,11 @@ const useToggle = create((set) => ({
   openCategory: false,
   setOpenCategory: () => set(() => ({ openCategory: true })),
   setCloseCategory: () => set(() => ({ openCategory: false })),
+
+  openMobileNav: false,
+  setOpenMobileNav: () =>
+    set((state) => ({ openMobileNav: !state.openMobileNav })),
+  // setCloseMonileNav: () => set(() => ({ openMobileNav: false })),
 }));
 
 export default useToggle;

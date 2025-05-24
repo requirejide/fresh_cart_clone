@@ -8,10 +8,12 @@ import CartModal from "../components/CartModal";
 import ScrollToTop from "../components/ScrollToTop";
 import { FaAngleRight } from "react-icons/fa6";
 import CategoryAside from "../components/CategoryAside";
+import MobileNavlist from "../components/MobileNavlist";
 
 export default function Layout() {
   return (
     <div className="relative">
+      <MobileNavlist />
       <CategoryAside />
       <ScrollToTop />
       <SuperDeal

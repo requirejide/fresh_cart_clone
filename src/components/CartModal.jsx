@@ -19,7 +19,7 @@ function CartModal() {
               scale: { type: "spring", bounce: 0.5 },
             }}
             exit={{ scale: 0 }}
-            className="fixed bottom-6 right-6 z-[100] w-[240px] px-4 py-3 flex items-center justify-center shadow-xl border border-gray-100  bg-white text-green-600 rounded-sm font-medium text-sm"
+            className="fixed bottom-6 right-6 z-[100]   px-4 py-3 flex items-center justify-center shadow-xl border border-gray-100  bg-white text-green-600 rounded-sm font-medium text-sm"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
