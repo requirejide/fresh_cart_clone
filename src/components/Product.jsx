@@ -8,6 +8,7 @@ import { MdOutlineCompareArrows } from "react-icons/md";
 import BackwardLink from "./BackwardLink";
 import Card from "./Card";
 import { motion } from "motion/react";
+motion;
 
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
@@ -47,7 +48,7 @@ export default function Product() {
       <motion.div
         initial={{ x: `100%` }}
         animate={{ x: `0%` }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
         className="bg-white px-2 sm:px-6 mt-14  lg:px-8"
       >
         <div className="max-w-7xl  mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-10">
@@ -162,30 +163,7 @@ export default function Product() {
           </div>
         </div>
         {/* Tabs */}
-        <div className="mt-10 mb-32  max-w-7xl mx-auto scrollbar-hide  overflow-scroll">
-          <div className="border-b border-gray-200">
-            <ul className="-mb-px flex space-x-8 " aria-label="Tabs">
-              {tabs.map((value, index) => (
-                <li
-                  key={index}
-                  onClick={() => setSelectedTab(index)}
-                  className={` min-w-fit  cursor-pointer hover:text-green-600 hover:border-green-600 ${
-                    selectedTab === index
-                      ? "border-green-600 border-b-2 text-green-600"
-                      : " text-gray-900"
-                  }  py-4 px-1 text-sm font-medium`}
-                >
-                  {value}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Tab Content */}
-          {selectedTab === 0 && <ProductDetails />}
-
-          {selectedTab === 1 && <ProductInformation />}
-        </div>
+        <Tabs setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
         <h3 className="text-3xl mb-5">Related Items</h3>
 
         <div className="grid grid-cols-2 lg:grid-cols-5 space-y-5 mb-20 md:space-y-0 gap-x-3">
@@ -198,10 +176,46 @@ export default function Product() {
   );
 }
 
+function Tabs({ setSelectedTab, selectedTab }) {
+  return (
+    <>
+      <div className="mt-10 mb-32  max-w-7xl mx-auto scrollbar-hide  overflow-scroll">
+        <div className="border-b border-gray-200">
+          <ul className="-mb-px flex space-x-8 " aria-label="Tabs">
+            {tabs.map((value, index) => (
+              <li
+                key={index}
+                onClick={() => setSelectedTab(index)}
+                className={` min-w-fit  cursor-pointer hover:text-green-600 hover:border-green-600 ${
+                  selectedTab === index
+                    ? "border-green-600 border-b-2 text-green-600"
+                    : " text-gray-900"
+                }  py-4 px-1 text-sm font-medium`}
+              >
+                {value}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Tab Content */}
+        {selectedTab === 0 && <ProductDetails />}
+
+        {selectedTab === 1 && <ProductInformation />}
+      </div>
+    </>
+  );
+}
+
 function ProductDetails() {
   return (
     <>
-      <div className="mt-6">
+      <motion.div
+        initial={{ y: "50%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
+        className="mt-6"
+      >
         <h2 className="text-xl font-semibold text-gray-900">
           Nutrient Value & Benefits
         </h2>
@@ -232,7 +246,7 @@ function ProductDetails() {
           product. Every effort is made to maintain accuracy of all information
           displayed.
         </p>
-      </div>
+      </motion.div>
     </>
   );
 }
@@ -240,7 +254,11 @@ function ProductDetails() {
 function ProductInformation() {
   return (
     <>
-      <div>
+      <motion.div
+        initial={{ y: "50%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
+      >
         <h3 className="my-5 text-xl">Details</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <table className="">
@@ -304,7 +322,7 @@ function ProductInformation() {
             </tbody>
           </table>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

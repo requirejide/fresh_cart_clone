@@ -7,6 +7,10 @@ const useToggle = create((set) => ({
   openModal: false,
   setModalOpen: () => set(() => ({ openModal: true })),
   setModalClose: () => set(() => ({ openModal: false })),
+
+  openCategory: false,
+  setOpenCategory: () => set(() => ({ openCategory: true })),
+  setCloseCategory: () => set(() => ({ openCategory: false })),
 }));
 
 export default useToggle;

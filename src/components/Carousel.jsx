@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import slide_1 from "../assets/carousel/image_1.jpg";
 import slide_2 from "../assets/carousel/image_2.jpg";
 import { motion } from "motion/react";

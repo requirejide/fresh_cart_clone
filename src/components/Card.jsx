@@ -72,7 +72,7 @@ function Card({ value }) {
       {/* Price & Add to Cart */}
       <div className="flex justify-between items-center">
         <div className="text-sm text-gray-800 flex gap-x-2">
-          <span>$18</span>
+          <span>${value.unit_price}</span>
           <span className="line-through text-gray-400">$24</span>
         </div>
         <button

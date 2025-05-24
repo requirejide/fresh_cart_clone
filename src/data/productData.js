@@ -30,7 +30,7 @@ import product_15 from "../assets/product_images/cookie-3.jpg";
 export const product = [
   {
     id: 1,
-    title: " Lasta Čokoladni Kolutići",
+    title: "Lasta Čokoladni Kolutići",
     unit_price: 24,
     discount: true,
     discount_price: 50.6,
@@ -45,7 +45,7 @@ export const product = [
   {
     id: 2,
     title: "NutriChoice Digestive",
-    unit_price: 24,
+    unit_price: 14,
     discount: true,
     discount_price: 24,
     isSale: false,

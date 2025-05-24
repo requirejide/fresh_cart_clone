@@ -6,7 +6,9 @@ import usePrdouct from "../stores/useProduct";
 import { Link } from "react-router";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IoFunnelOutline } from "react-icons/io5";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import useToggle from "../stores/useToggle";
+motion;
 
 export default function Shop() {
   const { allProduct } = usePrdouct();
@@ -29,7 +31,7 @@ export default function Shop() {
       <motion.section
         initial={{ x: `100%` }}
         animate={{ x: `0%` }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
         className="flex gap-x-10"
       >
         <aside className="hidden lg:block lg:w-[20%] p-3 py">
@@ -65,6 +67,7 @@ function BannerTitle() {
 
 function CategoriesInShop() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+
   function handleCategory(id) {
     setSelectedCategory((curr) => (curr === id ? null : id));
   }
@@ -79,15 +82,21 @@ function CategoriesInShop() {
           >
             {value.title} <FaAngleRight className="ml-2 text-xs" />
           </li>
-          {selectedCategory === value.id &&
-            value.sub_category.map((value) => (
-              <p
-                key={value}
-                className="text-sm mt-3 hover:text-green-600 mb-4 cursor-pointer transition-all duration-[0.5s] ml-4"
-              >
-                {value}
-              </p>
-            ))}
+          <AnimatePresence>
+            {selectedCategory === value.id &&
+              value.sub_category.map((value) => (
+                <motion.p
+                  initial={{ opacity: 0, y: "-50%" }}
+                  animate={{ opacity: 1, y: "0%" }}
+                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0, y: "-50%" }}
+                  key={value}
+                  className="text-sm mt-3 hover:text-green-600 mb-4 cursor-pointer transition-all duration-[0.5s] ml-4"
+                >
+                  {value}
+                </motion.p>
+              ))}
+          </AnimatePresence>
         </ul>
       ))}
     </>
@@ -95,19 +104,52 @@ function CategoriesInShop() {
 }
 
 function ShopProducts({ currentProduct }) {
+  const [selectedOption, setSelectedOption] = useState("");
+  const { setOpenCategory } = useToggle();
   const { allProduct } = usePrdouct();
+
+  const sortedProducts = [...currentProduct].sort((a, b) => {
+    if (selectedOption === "ascending") {
+      return a.unit_price - b.unit_price;
+    } else if (selectedOption === "descending") {
+      return b.unit_price - a.unit_price;
+    } else if (selectedOption === "title") {
+      return a.title.localeCompare(b.title);
+    } else {
+      return 0;
+    }
+  });
   return (
     <>
-      <p className="py-4 ">
-        <span className="font-bold">{allProduct.length}</span> Products found
-      </p>
-      <button className="lg:hidden   mb-4 flex gap-x-2 border text-gray-900 rounded-lg px-4 py-2 items-center">
-        <IoFunnelOutline className="text-xl" />
-        <span className="text-base">Filters</span>
-      </button>
+      <div className="my-7 lg:flex justify-between items-center">
+        <p className="font-semibold text-base mb-5 lg:mb-0">
+          {allProduct.length}{" "}
+          <span className="font-medium text-gray-700">Products found</span>
+        </p>
+        <div className="flex items-center justify-between">
+          <select
+            onChange={(e) => setSelectedOption(e.target.value)}
+            className="border border-gray-400  pl-2   cursor-pointer py-3 rounded-lg text-sm outline-0"
+          >
+            <option value="">Sort by: Featured</option>
+            <option value="ascending">Price: Low to high</option>
+            <option value="descending">Price: High to low</option>
+            <option value="title">Sort by: A to Z</option>
+            <option value="">Release Date</option>
+            <option value="">Avg. Rating</option>
+          </select>
+          <button
+            onClick={setOpenCategory}
+            className="lg:hidden  flex gap-x-2 border border-gray-700 text-gray-900 rounded-lg px-4 py-2 items-center"
+          >
+            <IoFunnelOutline className="text-xl" />
+            <span className="text-base">Filters</span>
+          </button>
+        </div>
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-        {currentProduct.map((value) => (
+        {sortedProducts.map((value) => (
           <Card key={value.id} value={value} />
         ))}
       </div>

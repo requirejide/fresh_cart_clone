@@ -1,9 +1,12 @@
 import { IoCloseOutline } from "react-icons/io5";
-import useToggle from "../stores/useToggle";
 import { RiDeleteBin2Line } from "react-icons/ri";
+
+import useToggle from "../stores/useToggle";
 import usePrdouct from "../stores/useProduct";
+
 import { AnimatePresence, motion } from "motion/react";
 motion;
+
 export default function Cart() {
   const { isCartOpen, setIsCartOpen } = useToggle();
   return (
