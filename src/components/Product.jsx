@@ -12,7 +12,7 @@ motion;
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
 export default function Product() {
-  const { allProduct, addToWishList, wishList } = usePrdouct();
+  const { allProduct, addToWishList, wishList, filterWishList } = usePrdouct();
   const [selectedImg, setSelectedImg] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -140,17 +140,15 @@ export default function Product() {
                 <button className="bg-green-600 text-sm flex items-center gap-x-2 text-white px-10 font-semibold py-2 rounded hover:bg-green-700">
                   <LuShoppingBag className="text-2xl" /> Add to Cart
                 </button>
-                <button
-                  onClick={() => addToWishList(details)}
-                  className="text-gray-500 text-2xl cursor-pointer  hover:text-gray-700"
-                >
+                <button className="text-gray-500 text-2xl cursor-pointer  hover:text-gray-700">
                   {markedWish?.id === details.id ? (
-                    <FaHeart className="text-green-600" />
+                    <FaHeart
+                      onClick={() => filterWishList(details)}
+                      className="text-green-600"
+                    />
                   ) : (
-                    <CiHeart />
+                    <CiHeart onClick={() => addToWishList(details)} />
                   )}
-
-                  {/* <FaHeart /> */}
                 </button>
                 <button className="text-gray-500 text-2xl cursor-pointer hover:text-gray-700">
                   ⇄
