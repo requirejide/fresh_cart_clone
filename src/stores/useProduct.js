@@ -4,6 +4,7 @@ import { product } from "../data/productData";
 const usePrdouct = create((set) => ({
   allProduct: product,
   cart: JSON.parse(localStorage.getItem("cartItem")) || [],
+  wishList: JSON.parse(localStorage.getItem("wishlist")) || [],
   modalMessage: "",
   addToCart: (productObj) =>
     set((state) => {
@@ -46,6 +47,34 @@ const usePrdouct = create((set) => ({
       localStorage.setItem("cartItem", JSON.stringify(update));
 
       return { cart: update };
+    }),
+
+  addToWishList: (productObj) =>
+    set((state) => {
+      const checkWishList = state.wishList.find(
+        (value) => value.id === productObj.id
+      );
+
+      if (checkWishList) {
+        const update = state.wishList.map(
+          (value) => value.id === productObj.id && value
+        );
+        localStorage.setItem("wishlist", JSON.stringify(update));
+        return { wishList: update };
+      } else {
+        const update = [...state.wishList, productObj];
+        localStorage.setItem("wishlist", JSON.stringify(update));
+        return { wishList: update };
+      }
+    }),
+
+  filterWishList: (productObj) =>
+    set((state) => {
+      const update = state.wishList.filter(
+        (value) => value.id !== productObj.id
+      );
+      localStorage.setItem("wishlist", JSON.stringify(update));
+      return { wishList: update };
     }),
 }));
 

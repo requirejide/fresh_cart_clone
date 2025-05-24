@@ -53,11 +53,11 @@ export default function Carousel() {
         </div>
         {carousel.map((value, index) => (
           <motion.div
-            animate={{ translateX: `-${currentIndex * 100}%` }}
-            transition={{
-              duration: 0.5,
-              translateX: { type: "spring", bounce: 0.5 },
-            }}
+            // animate={{ translateX: `-${currentIndex * 100}%` }}
+            // transition={{
+            //   duration: 0.5,
+            //   translateX: { type: "spring", bounce: 0.5 },
+            // }}
             onMouseEnter={pauseSlide}
             onMouseLeave={nextSlide}
             key={index}

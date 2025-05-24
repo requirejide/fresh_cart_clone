@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import usePrdouct from "../stores/useProduct";
 import { useParams } from "react-router";
-import { FaRegHeart, FaStar } from "react-icons/fa6";
-import { FaStarHalfAlt } from "react-icons/fa";
 import { LuShoppingBag } from "react-icons/lu";
-import { MdOutlineCompareArrows } from "react-icons/md";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 import BackwardLink from "./BackwardLink";
 import Card from "./Card";
 import { motion } from "motion/react";
@@ -13,9 +12,10 @@ motion;
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
 export default function Product() {
-  const { allProduct } = usePrdouct();
+  const { allProduct, addToWishList, wishList } = usePrdouct();
   const [selectedImg, setSelectedImg] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
+
   const [zoom, setZoom] = useState(false);
   const [pointer, setPointer] = useState({ x: 50, y: 50 });
   const { title } = useParams();
@@ -41,6 +41,8 @@ export default function Product() {
     setPointer({ x, y });
   };
   const related = allProduct.slice(0, 5);
+  const markedWish = wishList.find((value) => value.id === details.id);
+  console.log(wishList);
 
   return (
     <>
@@ -138,8 +140,17 @@ export default function Product() {
                 <button className="bg-green-600 text-sm flex items-center gap-x-2 text-white px-10 font-semibold py-2 rounded hover:bg-green-700">
                   <LuShoppingBag className="text-2xl" /> Add to Cart
                 </button>
-                <button className="text-gray-500 text-2xl cursor-pointer  hover:text-gray-700">
-                  ♡
+                <button
+                  onClick={() => addToWishList(details)}
+                  className="text-gray-500 text-2xl cursor-pointer  hover:text-gray-700"
+                >
+                  {markedWish?.id === details.id ? (
+                    <FaHeart className="text-green-600" />
+                  ) : (
+                    <CiHeart />
+                  )}
+
+                  {/* <FaHeart /> */}
                 </button>
                 <button className="text-gray-500 text-2xl cursor-pointer hover:text-gray-700">
                   ⇄

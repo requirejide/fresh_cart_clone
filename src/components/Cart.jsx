@@ -5,6 +5,7 @@ import useToggle from "../stores/useToggle";
 import usePrdouct from "../stores/useProduct";
 
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "react-router";
 motion;
 
 export default function Cart() {
@@ -68,19 +69,30 @@ function CartInfo() {
 
 function CartItems() {
   const { addToCart, cart, decrementQuantity, removeProduct } = usePrdouct();
+  const setModalOff = useToggle((s) => s.setIsCartOpen);
 
   return (
     <ul className="mb-5">
       {cart.map((value) => (
         <li key={value.id} className="flex items-center justify-between">
           <div className="h-[100px]  flex items-center gap-x-5 ">
-            <img
-              src={value.image[0]}
-              alt=""
-              className="w-[60px] h-[60px] object-contain"
-            />
+            <Link
+              onClick={setModalOff}
+              to={`/shop/${value.title.replaceAll(" ", "-")}`}
+            >
+              <img
+                src={value.image[0]}
+                alt=""
+                className="w-[60px] h-[60px] object-contain"
+              />
+            </Link>
             <div>
-              <p className="text-sm mb-2 font-semibold">{value.title}</p>
+              <Link
+                onClick={setModalOff}
+                to={`/shop/${value.title.replaceAll(" ", "-")}`}
+              >
+                <p className="text-sm mb-2 font-semibold">{value.title}</p>
+              </Link>
               <div className="flex items-center gap-x-2 hover:text-red-600">
                 <RiDeleteBin2Line
                   onClick={() => removeProduct(value)}
