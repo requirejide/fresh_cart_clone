@@ -6,6 +6,7 @@ const usePrdouct = create((set) => ({
   cart: JSON.parse(localStorage.getItem("cartItem")) || [],
   wishList: JSON.parse(localStorage.getItem("wishlist")) || [],
   modalMessage: "",
+  searched: null,
   addToCart: (productObj) =>
     set((state) => {
       const validateCart = state.cart.find(
@@ -76,6 +77,8 @@ const usePrdouct = create((set) => ({
       localStorage.setItem("wishlist", JSON.stringify(update));
       return { wishList: update };
     }),
+
+  setSearched: (value) => set(() => ({ searched: value })),
 }));
 
 export default usePrdouct;

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import usePrdouct from "../stores/useProduct";
+import { Link } from "react-router";
 
 function SearchBar() {
   const [outline, setOutline] = useState(false);
   const [inputEl, setInputEl] = useState("");
-  // const { allProduct } = usePrdouct();
+  const { allProduct } = usePrdouct();
 
   window.addEventListener("click", function () {
     setOutline(false);
@@ -13,11 +15,23 @@ function SearchBar() {
     setInputEl(e);
   }
 
+  const res = allProduct.filter((value) =>
+    value.title.toLowerCase().includes(inputEl.toLowerCase())
+  );
+
   return (
     <>
       {inputEl.length > 1 && (
-        <div className="absolute  w-full h-20   border border-gray-200 shadow-2xl z-50   p-3 bg-white top-full  rounded-lg">
-          {inputEl}
+        <div className="absolute  w-full h-fit  border border-gray-200 shadow-2xl z-50   p-3 bg-white top-full  rounded-lg">
+          {res.map((value) => (
+            <Link
+              to={`/shop/?search=${value.title}`}
+              onClick={() => setInputEl("")}
+              key={value.id}
+            >
+              <p className=" hover:bg-gray-100 py-2 px-2">{value.title}</p>
+            </Link>
+          ))}
         </div>
       )}
       <div

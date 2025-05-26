@@ -3,7 +3,7 @@ import category from "../data/categoryData";
 import { FaAngleRight } from "react-icons/fa6";
 import Card from "../components/Card";
 import usePrdouct from "../stores/useProduct";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IoFunnelOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "motion/react";
@@ -107,6 +107,8 @@ function ShopProducts({ currentProduct }) {
   const [selectedOption, setSelectedOption] = useState("");
   const { setOpenCategory } = useToggle();
   const { allProduct } = usePrdouct();
+  const [search] = useSearchParams("search");
+  const searchedParams = search.get("search");
 
   const sortedProducts = [...currentProduct].sort((a, b) => {
     if (selectedOption === "ascending") {
@@ -119,6 +121,13 @@ function ShopProducts({ currentProduct }) {
       return 0;
     }
   });
+
+  const filteredBySearch = [...currentProduct].filter(
+    (value) => value.title === searchedParams
+  );
+
+  console.log(filteredBySearch);
+
   return (
     <>
       <div className="my-7 lg:flex justify-between items-center">
@@ -149,9 +158,11 @@ function ShopProducts({ currentProduct }) {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-        {sortedProducts.map((value) => (
-          <Card key={value.id} value={value} />
-        ))}
+        {(filteredBySearch.length > 0 ? filteredBySearch : sortedProducts).map(
+          (value) => (
+            <Card key={value.id} value={value} />
+          )
+        )}
       </div>
     </>
   );

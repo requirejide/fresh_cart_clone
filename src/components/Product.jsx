@@ -12,7 +12,8 @@ motion;
 const tabs = ["Product Details", "Information", "Reviews", "Seller Info"];
 
 export default function Product() {
-  const { allProduct, addToWishList, wishList, filterWishList } = usePrdouct();
+  const { allProduct, addToCart, addToWishList, wishList, filterWishList } =
+    usePrdouct();
   const [selectedImg, setSelectedImg] = useState(0);
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -137,7 +138,10 @@ export default function Product() {
                 </div>
               </div>
               <div className="mt-6 flex items-center space-x-4">
-                <button className="bg-green-600 text-sm flex items-center gap-x-2 text-white px-10 font-semibold py-2 rounded hover:bg-green-700">
+                <button
+                  onClick={() => addToCart(details)}
+                  className="bg-green-600 text-sm flex items-center gap-x-2 text-white px-10 font-semibold py-2 rounded hover:bg-green-700"
+                >
                   <LuShoppingBag className="text-2xl" /> Add to Cart
                 </button>
                 <button className="text-gray-500 text-2xl cursor-pointer  hover:text-gray-700">
